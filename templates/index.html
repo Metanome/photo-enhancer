@@ -1,13 +1,58 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Enhancer</title>
+    <style>
+        #preview { margin-top: 20px; }
+        #loader { display: none; }
+    </style>
 </head>
 <body>
     <h1>Upload an Image</h1>
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li style="color: red;">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
     <form action="/" method="post" enctype="multipart/form-data">
-        <input type="file" name="image" accept="image/*" required>
+        <input type="file" name="image" accept="image/*" required onchange="previewImage(event)">
+        <div id="preview" style="display:none;">
+            <h3>Image Preview</h3>
+            <img id="imagePreview" src="" alt="Preview" width="300">
+        </div>
+        <br><br>
+
+        <label for="brightness">Brightness:</label>
+        <input type="range" name="brightness" min="0.5" max="3.0" step="0.1" value="2.5">
+        
+        <br><br>
         <button type="submit">Upload</button>
     </form>
+
+    <div id="loader">Uploading...</div>
+
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var preview = document.getElementById("imagePreview");
+                preview.src = reader.result;
+                document.getElementById("preview").style.display = "block";
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        document.querySelector("form").onsubmit = function() {
+            document.getElementById("loader").style.display = "block";
+        };
+    </script>
 </body>
 </html>
