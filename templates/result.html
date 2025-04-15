@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+    <title>Enhanced Result</title>
+</head>
+<body>
+    <h1>Original vs Enhanced</h1>
+    <div style="display: flex; gap: 20px;">
+        <div>
+            <h3>Original</h3>
+            <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="400">
+        </div>
+        <div>
+            <h3>Enhanced</h3>
+            <img src="{{ url_for('static', filename='uploads/' + enhanced) }}" width="400">
+            <br><br>
+            <a href="{{ url_for('static', filename='uploads/' + enhanced) }}" download>
+                <button>Download Enhanced Image</button>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
