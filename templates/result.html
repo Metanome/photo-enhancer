@@ -1,25 +1,34 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Result</title>
+    <title>Enhanced Photo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
+        .container { max-width: 400px; margin: 40px auto; background: #fff; padding: 24px; border-radius: 8px; box-shadow: 0 2px 8px #0001; text-align: center; }
+        img { max-width: 100%; border-radius: 6px; margin-bottom: 16px; }
+        .btn { display: inline-block; margin: 8px 4px; padding: 10px 18px; background: #007bff; color: #fff; border: none; border-radius: 4px; text-decoration: none; font-size: 1em; }
+        .btn:hover { background: #0056b3; }
+        @media (max-width: 500px) {
+            .container { max-width: 98vw; padding: 10vw 2vw; }
+        }
+    </style>
 </head>
 <body>
-    <h1>Original vs Enhanced</h1>
-    <div style="display: flex; gap: 20px;">
-        <div>
-            <h3>Original</h3>
-            <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="400">
-        </div>
-        <div>
-            <h3>Enhanced</h3>
-            <img src="{{ url_for('static', filename='uploads/' + enhanced) }}" width="400">
-            <br><br>
-            <a href="{{ url_for('static', filename='uploads/' + enhanced) }}" download>
-                <button>Download Enhanced Image</button>
-            </a>
-        </div>
+<div class="container">
+    <h2>Enhanced Photo</h2>
+    <div>
+        <h4>Original</h4>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Original Image">
+        <a class="btn" href="{{ url_for('static', filename='uploads/' + filename) }}" download>Download Original</a>
     </div>
+    <div>
+        <h4>Enhanced</h4>
+        <img src="{{ url_for('static', filename='uploads/' + enhanced) }}" alt="Enhanced Image">
+        <a class="btn" href="{{ url_for('static', filename='uploads/' + enhanced) }}" download>Download Enhanced</a>
+    </div>
+    <a class="btn" href="{{ url_for('index') }}">Enhance Another Photo</a>
+</div>
 </body>
 </html>
